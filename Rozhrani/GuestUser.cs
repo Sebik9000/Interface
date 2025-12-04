@@ -1,6 +1,6 @@
 namespace Rozhrani
 {
-    public class AdminUser : User, ILoginable, IAuthorizable
+    public class GuestUser : User, ILoginable, IAuthorizable
     {
         /// <summary>
         /// Inicializuje novou instanci AdminUser
@@ -8,12 +8,21 @@ namespace Rozhrani
         /// <param name="userName">Uživatelské jméno</param>
         /// <param name="email">Uživatelský e-mail</param>
         /// <param name="password">Heslo uživatele</param>
-        public AdminUser(string userName, string email, string password) : base(userName, email, password)
+        public GuestUser(string userName, string email, string password) : base(userName, email, password)
         {
         }
-        public void Login(string userName, string passWord)
-        {
 
+        public void Login(string userName, string passWord)
+
+        {
+        if (userName == UserName && passWord == Password)
+        {
+            Console.WriteLine($"Uživatel {UserName} byl přihlášen (host).");
+        }
+        else
+        {
+            Console.WriteLine("Špatně údaje.");
+        }
         }
         
         public bool Authorize(string username, string password)
@@ -23,14 +32,7 @@ namespace Rozhrani
         
         public bool HasAccess(string resource)
         {
-            return true;
+            return resource == "StudentPortal";
         }
-
-        public override string GetInfo()
-        {
-            return base.GetInfo() + "(Admin)";
-
-        }
-
     }
 }

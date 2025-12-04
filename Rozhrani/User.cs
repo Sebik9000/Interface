@@ -42,7 +42,12 @@ namespace Rozhrani
         {
             UserName = userName;
             Email = email;
-            PassWord = password;
+            Password = password;
+        }
+
+        public virtual string GetInfo()
+        {
+            return $"Uživatel: {UserName}, E-mail: {Email}";
         }
 
     }
